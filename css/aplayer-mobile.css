@@ -1,0 +1,80 @@
+/*
+ * Sakurairo 移动端 APlayer 音乐播放器增强
+ * 确保播放器在移动设备上正常显示和使用
+ */
+
+@media (max-width: 768px) {
+    /* 1. 确保播放器容器显示 */
+    body #aplayer-float.aplayer {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    /* 2. 移动端布局优化 */
+    body #aplayer-float.aplayer {
+        max-width: 100% !important;
+        width: 100% !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    /* 3. 播放器主体适配 */
+    #aplayer-float .aplayer-body {
+        max-width: 100%;
+        padding-right: 0;
+    }
+
+    /* 4. 触摸优化 - 增大按钮触摸区域 */
+    #aplayer-float .aplayer-icon {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 8px;
+    }
+
+    /* 5. 播放控制按钮优化 */
+    #aplayer-float .aplayer-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* 6. 移动端进度条优化 - 更容易拖动 */
+    #aplayer-float .aplayer-bar-wrap {
+        padding: 8px 0;
+    }
+
+    #aplayer-float .aplayer-bar-wrap .aplayer-bar {
+        height: 4px;
+    }
+
+    #aplayer-float .aplayer-bar-wrap .aplayer-bar .aplayer-thumb {
+        height: 14px;
+        width: 14px;
+        margin-top: -6px;
+    }
+
+    /* 7. 安全区域适配（刘海屏手机） */
+    #aplayer-float {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* 8. 播放列表在移动端的优化 */
+    #aplayer-float .aplayer-list {
+        max-height: 250px;
+    }
+
+    /* 9. 性能优化 - 启用硬件加速 */
+    #aplayer-float {
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    /* 10. 音量控制在移动端隐藏（系统音量控制） */
+    #aplayer-float .aplayer-volume-wrap {
+        display: none;
+    }
+}
