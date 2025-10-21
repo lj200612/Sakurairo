@@ -1,25 +1,26 @@
 /*
- * Sakurairo 九宫格文章布局
+ * Sakurairo 文章布局样式
+ * 支持网格布局和单列布局两种模式
  * 仅在桌面端生效，移动端保持原有布局
  */
 
-/* 桌面端九宫格布局（屏幕宽度 > 768px） */
+/* ========== 网格布局模式（默认） ========== */
+/* 桌面端网格布局（屏幕宽度 > 768px） */
 @media (min-width: 769px) {
-    /* 1. 将主容器改为Grid布局 */
-    #main.site-main {
+    body.layout-mode-grid #main.site-main {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* 3列 */
         gap: 20px; /* 卡片之间的间距 */
         padding: 0 10px;
     }
 
-    /* 2. 标题占满整行 */
-    #main.site-main .main-title.posts-area-title {
+    /* 标题占满整行 */
+    body.layout-mode-grid #main.site-main .main-title.posts-area-title {
         grid-column: 1 / -1; /* 跨越所有列 */
     }
 
-    /* 3. 调整文章卡片适配九宫格 */
-    #main.site-main .post-list-thumb {
+    /* 调整文章卡片适配网格 */
+    body.layout-mode-grid #main.site-main .post-list-thumb {
         width: 100%; /* 占满grid单元格 */
         height: auto; /* 高度自适应内容 */
         min-height: 350px; /* 最小高度 */
@@ -27,20 +28,20 @@
         float: none; /* 移除float，使用grid布局 */
     }
 
-    /* 4. 优化文章卡片内容排列 */
-    #main.site-main .post-list-thumb {
+    /* 优化文章卡片内容排列 */
+    body.layout-mode-grid #main.site-main .post-list-thumb {
         display: flex;
         flex-direction: column;
     }
 
-    /* 5. 文章缩略图适配 */
-    #main.site-main .post-thumb {
+    /* 文章缩略图适配 */
+    body.layout-mode-grid #main.site-main .post-thumb {
         height: 200px;
         overflow: hidden;
     }
 
-    /* 6. 文章标题优化 */
-    #main.site-main .post-list-thumb .post-title h3 {
+    /* 文章标题优化 */
+    body.layout-mode-grid #main.site-main .post-list-thumb .post-title h3 {
         font-size: 16px;
         line-height: 1.4;
         margin: 10px 15px;
@@ -51,8 +52,8 @@
         text-overflow: ellipsis;
     }
 
-    /* 7. 文章摘要优化 */
-    #main.site-main .post-excerpt {
+    /* 文章摘要优化 */
+    body.layout-mode-grid #main.site-main .post-excerpt {
         font-size: 13px;
         line-height: 1.6;
         padding: 0 15px;
@@ -64,44 +65,94 @@
         text-overflow: ellipsis;
     }
 
-    /* 8. 文章元信息（日期、分类等）布局 */
-    #main.site-main .post-meta {
+    /* 文章元信息（日期、分类等）布局 */
+    body.layout-mode-grid #main.site-main .post-meta {
         padding: 10px 15px;
         margin-top: auto; /* 推到底部 */
     }
 }
 
-/* 较大屏幕优化（宽度 > 1200px） */
+/* 较大屏幕优化（宽度 > 1200px） - 网格模式 */
 @media (min-width: 1201px) {
-    #main.site-main {
+    body.layout-mode-grid #main.site-main {
         gap: 25px; /* 增大间距 */
     }
 
-    #main.site-main .post-list-thumb {
+    body.layout-mode-grid #main.site-main .post-list-thumb {
         min-height: 380px;
     }
 
-    #main.site-main .post-thumb {
+    body.layout-mode-grid #main.site-main .post-thumb {
         height: 220px;
     }
 }
 
-/* 中等屏幕优化（769px - 1024px）改为2列 */
+/* 中等屏幕优化（769px - 1024px）改为2列 - 网格模式 */
 @media (min-width: 769px) and (max-width: 1024px) {
-    #main.site-main {
+    body.layout-mode-grid #main.site-main {
         grid-template-columns: repeat(2, 1fr); /* 2列 */
         gap: 15px;
     }
 
-    #main.site-main .post-list-thumb {
+    body.layout-mode-grid #main.site-main .post-list-thumb {
         min-height: 320px;
     }
 }
 
-/* 平板横屏（1025px - 1200px）也是2列 */
+/* 平板横屏（1025px - 1200px）也是2列 - 网格模式 */
 @media (min-width: 1025px) and (max-width: 1200px) {
-    #main.site-main {
+    body.layout-mode-grid #main.site-main {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+    }
+}
+
+/* ========== 单列布局模式 ========== */
+/* 桌面端单列布局（屏幕宽度 > 768px） */
+@media (min-width: 769px) {
+    /* 保持传统单列布局，一行一篇文章 */
+    body.layout-mode-single #main.site-main .post-list-thumb {
+        width: 100%;
+        float: left;
+        margin: 15px 0;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 单列布局下的缩略图 */
+    body.layout-mode-single #main.site-main .post-thumb {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* 单列布局下的标题 */
+    body.layout-mode-single #main.site-main .post-list-thumb .post-title {
+        position: absolute;
+        bottom: 22%;
+        left: 2%;
+        max-width: 80%;
+    }
+
+    body.layout-mode-single #main.site-main .post-list-thumb .post-title h3 {
+        font-size: 18px;
+        line-height: 1.5;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+    }
+
+    /* 单列布局下的摘要 */
+    body.layout-mode-single #main.site-main .post-excerpt {
+        position: absolute;
+        bottom: 5%;
+        width: 98%;
+        max-height: 15%;
+        left: 2%;
+        font-size: 15px;
+        overflow: hidden;
     }
 }

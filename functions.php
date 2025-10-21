@@ -990,6 +990,13 @@ function akina_body_classes($classes)
     } else {
         $classes[] = ' ';
     }
+
+    // 添加首页布局类名
+    if (is_home() || is_front_page()) {
+        $layout_mode = iro_opt('homepage_layout_mode', 'grid');
+        $classes[] = 'layout-mode-' . $layout_mode;
+    }
+
     return $classes;
 }
 add_filter('body_class', 'akina_body_classes');

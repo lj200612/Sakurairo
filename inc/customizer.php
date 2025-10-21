@@ -1042,6 +1042,25 @@ $sections = [
 				],
 			],
 			[
+				'type'     => 'radio',
+				'settings' => 'homepage_layout_mode',
+				'iro_key'  => 'homepage_layout_mode',
+				'label'    => esc_html__( 'Desktop Article Layout', 'Sakurairo_C' ),
+				'description' => esc_html__( 'Choose the article layout style for desktop. Grid layout automatically adjusts columns based on screen width (2-3 columns), while single column displays one article per row.', 'Sakurairo_C' ),
+				'choices'  => [
+					'grid'   => esc_html__( 'Grid Layout (Auto-adjust columns by screen resolution)', 'Sakurairo_C' ),
+					'single' => esc_html__( 'Single Column Layout (One article per row)', 'Sakurairo_C' ),
+				],
+				'default'  => 'grid',
+				'active_callback' => [
+					[
+						'setting'  => 'homepage_components',
+						'operator' => 'contains',
+						'value'    => 'primary',
+					],
+				],
+			],
+			[
 				'type'     => 'text',
 				'settings' => 'area_title_font',
 				'iro_key'  => 'area_title_font',
