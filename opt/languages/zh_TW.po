@@ -4443,3 +4443,15 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/Fuukei"
 msgstr ""
+
+#: options/theme-options.php:3785
+msgid "Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically."
+msgstr "請輸入有效的JSON格式配置。無效的JSON將自動回退到默認設置。"
+
+#: options/theme-options.php:3765
+msgid "Start from Sakurairo v2.4.0, plugin names in LightGallery option follow the form cited in official document (eg. lgHash instead of \"hash\"). The configuration now includes automatic error handling and validation."
+msgstr "從 Sakurairo v2.4.0 開始，LightGallery 選項中的插件名稱遵循官方文檔中的形式（例如 lgHash 而不是 \"hash\"）。配置現在包含自動錯誤處理和驗證。"
+
+#: options/theme-options.php:3772
+msgid "<strong>Configuration Examples:</strong><br/>• Simple gallery: <code>{\"plugins\":[\"lgZoom\"],\"selector\":\"figure > img\"}</code><br/>• With thumbnails: <code>{\"plugins\":[\"lgZoom\",\"lgThumbnail\"],\"thumbnail\":true}</code><br/>• Slideshow: <code>{\"plugins\":[\"lgZoom\",\"lgAutoplay\"],\"autoplay\":true,\"pause\":5000}</code><br/>• More examples in <code>inc/lightbox-config-examples.php</code>"
+msgstr "<strong>配置示例：</strong><br/>• 簡單畫廊：<code>{\"plugins\":[\"lgZoom\"],\"selector\":\"figure > img\"}</code><br/>• 帶縮略圖：<code>{\"plugins\":[\"lgZoom\",\"lgThumbnail\"],\"thumbnail\":true}</code><br/>• 幻燈片：<code>{\"plugins\":[\"lgZoom\",\"lgAutoplay\"],\"autoplay\":true,\"pause\":5000}</code><br/>• 更多示例見 <code>inc/lightbox-config-examples.php</code>"

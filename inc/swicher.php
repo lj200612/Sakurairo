@@ -114,8 +114,41 @@ function font_end_js_control()
     }
     if ($lightbox === 'lightgallery') {
         # 请务必使用正确标准的json格式
-        $lightGallery = str_replace(PHP_EOL, '', iro_opt('lightgallery_option'));
-        $iro_opt['lightGallery'] = json_decode($lightGallery, true);
+        $lightGallery_raw = iro_opt('lightgallery_option', '');
+
+        // 默认配置
+        $default_config = array(
+            'plugins' => array('lgZoom'),
+            'supportLegacyBrowser' => false,
+            'selector' => 'figure > img'
+        );
+
+        if (empty($lightGallery_raw)) {
+            // 没有配置，使用默认值
+            $iro_opt['lightGallery'] = $default_config;
+        } else {
+            // 清理JSON字符串中的空白字符（保留字符串内部的空格）
+            $lightGallery = trim($lightGallery_raw);
+
+            // 解析JSON
+            $decoded = json_decode($lightGallery, true);
+
+            // 验证解析结果
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                // 合并用户配置和默认配置，用户配置优先
+                $iro_opt['lightGallery'] = array_merge($default_config, $decoded);
+            } else {
+                // 解析失败，记录错误并使用默认配置
+                if (defined('WP_DEBUG') && WP_DEBUG) {
+                    error_log(sprintf(
+                        'Sakurairo LightGallery配置解析失败 (错误: %s): %s',
+                        json_last_error_msg(),
+                        substr($lightGallery, 0, 200)
+                    ));
+                }
+                $iro_opt['lightGallery'] = $default_config;
+            }
+        }
     }
     if (iro_opt('aplayer_server') != 'off') {
         $iro_opt['float_player_on'] = true;

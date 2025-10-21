@@ -3751,17 +3751,29 @@ $prefix = 'iro_options';
       array(
         'type'    => 'content',
         'content'=>__('<strong>Attension: Please read <a href="https://github.com/sachinchoolur/lightGallery#license">License Instruction</a> before use.</strong>'
-        .'<br/><strong><a href="https://www.lightgalleryjs.com/demos/thumbnails/">Demos</a></strong> | <strong><a href="https://www.lightgalleryjs.com/docs/settings/">Reference</a></strong> | <strong><a href="https://fastly.jsdelivr.net/npm/lightgallery@latest/plugins/">Plugin List</a></strong> '
-        .'<br/> Please write settings in JavaScript. An example has been provided as default setting.'
-        .'<br/> It should be captiable for Most User using WordPress Guttenberg Editor.'
-        .'<br/>Submit new discussion on Github for assistance. https://github.com/mirai-mamori/Sakurairo/discussions','sakurairo_csf')       ,
+        .'<br/><strong><a href="https://www.lightgalleryjs.com/demos/thumbnails/">Demos</a></strong> | <strong><a href="https://www.lightgalleryjs.com/docs/settings/">Reference</a></strong> | <strong><a href="https://www.lightgalleryjs.com/plugins/">Plugin List</a></strong> '
+        .'<br/> Please write settings in <strong>valid JSON format</strong>. An example has been provided as default setting.'
+        .'<br/> Configuration must be a valid JSON object. Invalid JSON will be automatically replaced with default settings to prevent errors.'
+        .'<br/> It should be compatible for most users using WordPress Gutenberg Editor.'
+        .'<br/>Submit new discussion on Github for assistance: <a href="https://github.com/mirai-mamori/Sakurairo/discussions" target="_blank">https://github.com/mirai-mamori/Sakurairo/discussions</a>','sakurairo_csf')       ,
         'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
       ),
 
       array(
         'type'    => 'submessage',
         'style'   => 'warning',
-        'content'=>__('Start from Sakurairo v2.4.0, plugins names in LightGallery option follow the form cite in official document (eg. lgHash instead of "hash")','sakurairo_csf')       ,
+        'content'=>__('Start from Sakurairo v2.4.0, plugin names in LightGallery option follow the form cited in official document (eg. lgHash instead of "hash"). The configuration now includes automatic error handling and validation.','sakurairo_csf')       ,
+        'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
+      ),
+
+      array(
+        'type'    => 'submessage',
+        'style'   => 'info',
+        'content'=>__('<strong>Configuration Examples:</strong>'
+        .'<br/>• Simple gallery: <code>{"plugins":["lgZoom"],"selector":"figure > img"}</code>'
+        .'<br/>• With thumbnails: <code>{"plugins":["lgZoom","lgThumbnail"],"thumbnail":true}</code>'
+        .'<br/>• Slideshow: <code>{"plugins":["lgZoom","lgAutoplay"],"autoplay":true,"pause":5000}</code>'
+        .'<br/>• More examples in <code>inc/lightbox-config-examples.php</code>','sakurairo_csf'),
         'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
       ),
 
@@ -3770,12 +3782,15 @@ $prefix = 'iro_options';
         'type' => 'code_editor',
         'sanitize' => false,
         'title' => __('LightGallery Lightbox Effect Options','sakurairo_csf'),
+        'desc' => __('Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically.','sakurairo_csf'),
         'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
         'default' => '{
-          "plugins":["lgHash","lgZoom"],
-          "supportLegacyBrowser":false,
-          "selector":"figure > img"
-        }'
+  "plugins": ["lgZoom"],
+  "supportLegacyBrowser": false,
+  "selector": "figure > img",
+  "speed": 400,
+  "mode": "lg-fade"
+}'
       ), 
 
       array(
