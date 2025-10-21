@@ -3752,10 +3752,7 @@ $prefix = 'iro_options';
         'type'    => 'content',
         'content'=>__('<strong>Attension: Please read <a href="https://github.com/sachinchoolur/lightGallery#license">License Instruction</a> before use.</strong>'
         .'<br/><strong><a href="https://www.lightgalleryjs.com/demos/thumbnails/">Demos</a></strong> | <strong><a href="https://www.lightgalleryjs.com/docs/settings/">Reference</a></strong> | <strong><a href="https://www.lightgalleryjs.com/plugins/">Plugin List</a></strong> '
-        .'<br/> Please write settings in <strong>valid JSON format</strong>. An example has been provided as default setting.'
-        .'<br/> Configuration must be a valid JSON object. Invalid JSON will be automatically replaced with default settings to prevent errors.'
-        .'<br/> It should be compatible for most users using WordPress Gutenberg Editor.'
-        .'<br/>Submit new discussion on Github for assistance: <a href="https://github.com/mirai-mamori/Sakurairo/discussions" target="_blank">https://github.com/mirai-mamori/Sakurairo/discussions</a>','sakurairo_csf')       ,
+        .'<br/> You can choose from preset configurations or customize your own settings.','sakurairo_csf')       ,
         'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
       ),
 
@@ -3767,13 +3764,27 @@ $prefix = 'iro_options';
       ),
 
       array(
+        'id' => 'lightgallery_preset',
+        'type' => 'radio',
+        'title' => __('LightGallery Configuration Mode','sakurairo_csf'),
+        'desc' => __('Choose a preset configuration or use custom settings','sakurairo_csf'),
+        'options' => array(
+          'preset_simple' => __('Preset 1: Simple Gallery (Basic zoom only)','sakurairo_csf'),
+          'preset_thumbnail' => __('Preset 2: Gallery with Thumbnails','sakurairo_csf'),
+          'preset_slideshow' => __('Preset 3: Auto-play Slideshow','sakurairo_csf'),
+          'custom' => __('Custom Configuration (Use JSON editor below)','sakurairo_csf'),
+        ),
+        'default' => 'preset_simple',
+        'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
+      ),
+
+      array(
         'type'    => 'submessage',
         'style'   => 'info',
-        'content'=>__('<strong>Configuration Examples:</strong>'
-        .'<br/>• Simple gallery: <code>{"plugins":["lgZoom"],"selector":"figure > img"}</code>'
-        .'<br/>• With thumbnails: <code>{"plugins":["lgZoom","lgThumbnail"],"thumbnail":true}</code>'
-        .'<br/>• Slideshow: <code>{"plugins":["lgZoom","lgAutoplay"],"autoplay":true,"pause":5000}</code>'
-        .'<br/>• More examples in <code>inc/lightbox-config-examples.php</code>','sakurairo_csf'),
+        'content'=>__('<strong>Preset 1 - Simple Gallery:</strong> Basic image lightbox with zoom capability. Lightweight and fast.'
+        .'<br/><strong>Preset 2 - Gallery with Thumbnails:</strong> Includes thumbnail navigation at the bottom.'
+        .'<br/><strong>Preset 3 - Auto-play Slideshow:</strong> Automatically plays through images with progress bar and fullscreen support.'
+        .'<br/><strong>Custom:</strong> Define your own configuration using JSON format.','sakurairo_csf'),
         'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
       ),
 
@@ -3781,15 +3792,20 @@ $prefix = 'iro_options';
         'id' => 'lightgallery_option',
         'type' => 'code_editor',
         'sanitize' => false,
-        'title' => __('LightGallery Lightbox Effect Options','sakurairo_csf'),
-        'desc' => __('Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically.','sakurairo_csf'),
-        'dependency' => array( 'lightbox', '==', 'lightgallery', '', 'true' ),
+        'title' => __('Custom LightGallery Configuration','sakurairo_csf'),
+        'desc' => __('Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically. This field is only used when "Custom Configuration" is selected above.','sakurairo_csf'),
+        'dependency' => array(
+          array( 'lightbox', '==', 'lightgallery', '', 'true' ),
+          array( 'lightgallery_preset', '==', 'custom', '', 'true' ),
+        ),
         'default' => '{
-  "plugins": ["lgZoom"],
+  "plugins": ["lgZoom", "lgThumbnail"],
   "supportLegacyBrowser": false,
   "selector": "figure > img",
   "speed": 400,
-  "mode": "lg-fade"
+  "mode": "lg-fade",
+  "thumbnail": true,
+  "showThumbByDefault": false
 }'
       ), 
 
