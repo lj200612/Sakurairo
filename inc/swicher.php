@@ -113,9 +113,89 @@ function font_end_js_control()
         }
     }
     if ($lightbox === 'lightgallery') {
-        # 请务必使用正确标准的json格式
-        $lightGallery = str_replace(PHP_EOL, '', iro_opt('lightgallery_option'));
-        $iro_opt['lightGallery'] = json_decode($lightGallery, true);
+        # LightGallery 配置处理（支持预置和自定义）
+        $preset_mode = iro_opt('lightgallery_preset', 'preset_simple');
+
+        // 预置配置定义
+        $preset_configs = array(
+            'preset_simple' => array(
+                'plugins' => array('lgZoom'),
+                'supportLegacyBrowser' => false,
+                'selector' => 'figure > img',
+                'speed' => 400,
+                'mode' => 'lg-fade'
+            ),
+            'preset_thumbnail' => array(
+                'plugins' => array('lgZoom', 'lgThumbnail'),
+                'supportLegacyBrowser' => false,
+                'selector' => 'figure > img',
+                'speed' => 400,
+                'mode' => 'lg-fade',
+                'thumbnail' => true,
+                'animateThumb' => true,
+                'showThumbByDefault' => false,
+                'thumbWidth' => 100,
+                'thumbHeight' => '80px',
+                'thumbMargin' => 5
+            ),
+            'preset_slideshow' => array(
+                'plugins' => array('lgZoom', 'lgAutoplay', 'lgFullscreen'),
+                'supportLegacyBrowser' => false,
+                'selector' => 'figure > img',
+                'speed' => 400,
+                'mode' => 'lg-fade',
+                'autoplay' => true,
+                'pause' => 5000,
+                'progressBar' => true,
+                'counter' => true
+            )
+        );
+
+        // 默认配置（回退）
+        $default_config = array(
+            'plugins' => array('lgZoom'),
+            'supportLegacyBrowser' => false,
+            'selector' => 'figure > img'
+        );
+
+        // 根据预置模式选择配置
+        if ($preset_mode === 'custom') {
+            // 自定义模式：从 JSON 编辑器获取配置
+            $lightGallery_raw = iro_opt('lightgallery_option', '');
+
+            if (empty($lightGallery_raw)) {
+                // 自定义但为空，使用默认配置
+                $iro_opt['lightGallery'] = $default_config;
+            } else {
+                // 清理并解析 JSON
+                $lightGallery = trim($lightGallery_raw);
+                $decoded = json_decode($lightGallery, true);
+
+                // 验证解析结果
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    // 合并用户配置和默认配置
+                    $iro_opt['lightGallery'] = array_merge($default_config, $decoded);
+                } else {
+                    // 解析失败，记录错误并使用默认配置
+                    if (defined('WP_DEBUG') && WP_DEBUG) {
+                        error_log(sprintf(
+                            'Sakurairo LightGallery配置解析失败 (错误: %s): %s',
+                            json_last_error_msg(),
+                            substr($lightGallery, 0, 200)
+                        ));
+                    }
+                    $iro_opt['lightGallery'] = $default_config;
+                }
+            }
+        } else {
+            // 预置模式：使用预定义配置
+            if (isset($preset_configs[$preset_mode])) {
+                $iro_opt['lightGallery'] = $preset_configs[$preset_mode];
+            } else {
+                // 未知预置，使用默认配置
+                $iro_opt['lightGallery'] = $default_config;
+            }
+        }
     }
     if (iro_opt('aplayer_server') != 'off') {
         $iro_opt['float_player_on'] = true;

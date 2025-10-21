@@ -4443,3 +4443,51 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/Fuukei"
 msgstr ""
+
+#: options/theme-options.php:3785
+msgid "Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically."
+msgstr "請輸入有效的JSON格式配置。無效的JSON將自動回退到默認設置。"
+
+#: options/theme-options.php:3765
+msgid "Start from Sakurairo v2.4.0, plugin names in LightGallery option follow the form cited in official document (eg. lgHash instead of \"hash\"). The configuration now includes automatic error handling and validation."
+msgstr "從 Sakurairo v2.4.0 開始，LightGallery 選項中的插件名稱遵循官方文檔中的形式（例如 lgHash 而不是 \"hash\"）。配置現在包含自動錯誤處理和驗證。"
+
+#: options/theme-options.php:3772
+msgid "<strong>Configuration Examples:</strong><br/>• Simple gallery: <code>{\"plugins\":[\"lgZoom\"],\"selector\":\"figure > img\"}</code><br/>• With thumbnails: <code>{\"plugins\":[\"lgZoom\",\"lgThumbnail\"],\"thumbnail\":true}</code><br/>• Slideshow: <code>{\"plugins\":[\"lgZoom\",\"lgAutoplay\"],\"autoplay\":true,\"pause\":5000}</code><br/>• More examples in <code>inc/lightbox-config-examples.php</code>"
+msgstr "<strong>配置示例：</strong><br/>• 簡單畫廊：<code>{\"plugins\":[\"lgZoom\"],\"selector\":\"figure > img\"}</code><br/>• 帶縮略圖：<code>{\"plugins\":[\"lgZoom\",\"lgThumbnail\"],\"thumbnail\":true}</code><br/>• 幻燈片：<code>{\"plugins\":[\"lgZoom\",\"lgAutoplay\"],\"autoplay\":true,\"pause\":5000}</code><br/>• 更多示例見 <code>inc/lightbox-config-examples.php</code>"
+
+#: options/theme-options.php:3769
+msgid "LightGallery Configuration Mode"
+msgstr "LightGallery 配置模式"
+
+#: options/theme-options.php:3770
+msgid "Choose a preset configuration or use custom settings"
+msgstr "選擇預設配置或使用自定義設置"
+
+#: options/theme-options.php:3772
+msgid "Preset 1: Simple Gallery (Basic zoom only)"
+msgstr "預設1：簡單畫廊（僅基礎縮放）"
+
+#: options/theme-options.php:3773
+msgid "Preset 2: Gallery with Thumbnails"
+msgstr "預設2：帶縮略圖畫廊"
+
+#: options/theme-options.php:3774
+msgid "Preset 3: Auto-play Slideshow"
+msgstr "預設3：自動播放幻燈片"
+
+#: options/theme-options.php:3775
+msgid "Custom Configuration (Use JSON editor below)"
+msgstr "自定義配置（使用下方JSON編輯器）"
+
+#: options/theme-options.php:3784
+msgid "<strong>Preset 1 - Simple Gallery:</strong> Basic image lightbox with zoom capability. Lightweight and fast.<br/><strong>Preset 2 - Gallery with Thumbnails:</strong> Includes thumbnail navigation at the bottom.<br/><strong>Preset 3 - Auto-play Slideshow:</strong> Automatically plays through images with progress bar and fullscreen support.<br/><strong>Custom:</strong> Define your own configuration using JSON format."
+msgstr "<strong>預設1 - 簡單畫廊：</strong>基礎圖片燈箱，支持縮放功能。輕量快速。<br/><strong>預設2 - 帶縮略圖畫廊：</strong>底部包含縮略圖導航。<br/><strong>預設3 - 自動播放幻燈片：</strong>自動播放圖片，帶進度條和全屏支持。<br/><strong>自定義：</strong>使用JSON格式自定義配置。"
+
+#: options/theme-options.php:3795
+msgid "Custom LightGallery Configuration"
+msgstr "自定義 LightGallery 配置"
+
+#: options/theme-options.php:3796
+msgid "Enter your LightGallery configuration in JSON format. Invalid JSON will fallback to default settings automatically. This field is only used when \"Custom Configuration\" is selected above."
+msgstr "輸入JSON格式的LightGallery配置。無效的JSON將自動回退到默認設置。此字段僅在選擇"自定義配置"時使用。"

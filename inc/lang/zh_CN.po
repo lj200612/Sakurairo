@@ -990,3 +990,19 @@ msgid ""
 "For more detailed configuration of the comment area, please go to the "
 "backend configuration"
 msgstr "更多评论区详细配置请前往后台"
+
+#: customizer.php:1048
+msgid "Desktop Article Layout"
+msgstr "桌面端文章布局"
+
+#: customizer.php:1049
+msgid "Choose the article layout style for desktop. Grid layout automatically adjusts columns based on screen width (2-3 columns), while single column displays one article per row."
+msgstr "选择桌面端的文章布局样式。网格布局会根据屏幕宽度自动调整列数（2-3列），单列布局则每行显示一篇文章。"
+
+#: customizer.php:1051
+msgid "Grid Layout (Auto-adjust columns by screen resolution)"
+msgstr "网格布局（根据屏幕分辨率自动调整列数）"
+
+#: customizer.php:1052
+msgid "Single Column Layout (One article per row)"
+msgstr "单列布局（一行一篇文章）"
